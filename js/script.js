@@ -1,3 +1,4 @@
+/* ./js/script.js of SilusGW-puzzle for puzzle.bauska.org */
 "use strict";
 // last update: 2026/02/26
 let puzzle, autoStart;
@@ -6,7 +7,7 @@ let useMouse = true;
 let lastMousePos;
 let ui; // user interface (menu)
 const fileExtension = ".puzz";
-const fileSignature = "cpzfilecct"; // just to check reloaded game has a chance to be a good one
+const fileSignature = "cpzfilecct"; // Just to check reloaded game has a chance to be a good one.
 
 const mhypot = Math.hypot,
   mrandom = Math.random,
@@ -125,7 +126,7 @@ function arrayShuffle(array) {
 //------------------------------------------------------------------------
 /* function below used to generate reproducible sequences of pseudo-random numbers
         one instance is used to create the details of the shapes of the pieces
-        so that only the seed of the function needs to be saved for save / restore operations of the puzzle
+        so that only the seed of the function needs to be saved for save / restore operations of the puzzle.
         */
 
 /* based on a function found at https://www.grc.com/otg/uheprng.htm
@@ -149,7 +150,7 @@ use :
             which is good.	See: http://baagoe.com/en/RandomMusings/hash/avalanche.xhtml
             ============================================================================
         */
-/* seed may be almost anything not evaluating to false */
+/* Seed may be almost anything not evaluating to false. */
 function mMash(seed) {
   let n = 0xefc8249d;
   let intSeed = (seed || Math.random()).toString();
@@ -236,13 +237,13 @@ function download(data, fileName, options = {}) {
                filename (string) the name to give to the file
             */
 
-  /* based on code found in a pen by Johann Karlsson https://codepen.io/DonKarlssonSan */
-  /* proposes to the user to save a file containing data from the program */
+  /* Based on code found in a pen by Johann Karlsson https://codepen.io/DonKarlssonSan */
+  /* proposes to the user to save a file containing data from the program. */
 
   let mediaType = ""; // no type results in text/plain;charset=US-ASCII
   if (typeof options.mediaType == "string") mediaType = options.mediaType;
-  /* mediaType MUST include ';base64' if provided data is base64-encoded */
-  /* mediaType DOES NOT end with a ',' character (appended in program) */
+  /* mediaType MUST include ';base64' if provided data is base64-encoded. */
+  /* mediaType DOES NOT end with a ',' character (appended in program). */
 
   let preEncoded = false;
   if (typeof options.preEncoded == "boolean") preEncoded = options.preEncoded;
@@ -2617,7 +2618,7 @@ let events = []; // queue for events
 
           case "move":
             if (event?.ev?.buttons === 0) {
-              events.push({ event: "leave" }); // buttons released while mouse out of canvas
+              events.push({ event: "leave" }); // buttons released while mouse out of canvas.
               break;
             }
             moving.pp.moveTo(
@@ -2628,7 +2629,7 @@ let events = []; // queue for events
             break;
           case "leave":
             if (puzzle.rotationStep && tStamp < moving.tInit + 250) {
-              // short click/touch: rotate
+              // Short click/touch: rotate.
               if (event.shiftKey)
                 moving.pp.rotate(
                   (moving.pp.rot + puzzle.nbRot - 1) % puzzle.nbRot
@@ -2636,8 +2637,8 @@ let events = []; // queue for events
               // ctrl: turn ccw
               else moving.pp.rotate((moving.pp.rot + 1) % puzzle.nbRot);
             }
-            // check if moved polypiece is close to a matching other polypiece
-            // check repeatedly since polypieces moved by merging may come close to other polypieces
+            // Check if moved polypiece is close to a matching other polypiece.
+            // Check repeatedly since polypieces moved by merging may come close to other polypieces.
             let doneSomething;
             moving.pp.selected = false;
             moving.pp.isMoving = false;
@@ -2652,11 +2653,11 @@ let events = []; // queue for events
               doneSomething = false;
               for (let k = puzzle.polyPieces.length - 1; k >= 0; --k) {
                 let pp = puzzle.polyPieces[k];
-                if (pp == moving.pp) continue; // don't match with myself
+                if (pp == moving.pp) continue; // don't match with myself.
                 if (moving.pp.ifNear(pp)) {
                   // a match !
                   merged = true;
-                  // compare polypieces sizes to move smallest one
+                  // Compare polypieces sizes to move smallest one.
                   if (pp.pieces.length > moving.pp.pieces.length) {
                     pp.merge(moving.pp);
                     moving.pp = pp; // memorize piece to follow
@@ -2710,7 +2711,7 @@ let events = []; // queue for events
         fitImage(tmpImage, puzzle.contWidth * 0.95, puzzle.contHeight * 0.95);
         let finalWidth = tmpImage.style.width;
         let finalHeight = tmpImage.style.height;
-        // set tmpImage to cover the exactly the only polypiece left, size and and position
+        // Set tmpImage to cover the exactly the only polypiece left, size and and position.
 
         tmpImage.style.width = `${puzzle.srcWidth * puzzle.scale}px`;
         tmpImage.style.height = `${puzzle.srcHeight * puzzle.scale}px`;
@@ -2725,8 +2726,8 @@ let events = []; // queue for events
           100
         }%`;
         tmpImage.style.boxShadow = "-4px 4px 4px rgba(0, 0, 0, 0.5)";
-        //              tmpImage.style.top=(puzzle.polyPieces[0].y + puzzle.scaley / 2) / puzzle.contHeight * 100 + 50 + "%" ;
-        //              tmpImage.style.left=(puzzle.polyPieces[0].x + puzzle.scalex / 2) / puzzle.contWidth * 100 + 50 + "%" ;
+        // tmpImage.style.top=(puzzle.polyPieces[0].y + puzzle.scaley / 2) / puzzle.contHeight * 100 + 50 + "%" ;
+        // tmpImage.style.left=(puzzle.polyPieces[0].x + puzzle.scalex / 2) / puzzle.contWidth * 100 + 50 + "%" ;
 
         tmpImage.classList.add("moving");
         setTimeout(() => {
@@ -2785,7 +2786,7 @@ let events = []; // queue for events
             event.touches[0].x - event.touches[1].x,
             event.touches[0].y - event.touches[1].y
           );
-          // (arbitrary) reference :  the zoom factor will be 2,71828 for a change in touches == dRef
+          // (arbitrary) reference :  the zoom factor will be 2,71828 for a change in touches == dRef.
           let dRef = msqrt(puzzle.contWidth * puzzle.contHeight) / 5;
           puzzle.zoomBy(Math.exp((d - dInit) / dRef), center);
           moving.touches = event.touches;
@@ -2797,7 +2798,7 @@ let events = []; // queue for events
         let savedData = puzzle.getStateData();
         let savedString = JSON.stringify(savedData);
         if (filesave) {
-          /* retrieve file name from user interface */
+          /* Retrieve file name from user interface. */
           let name = makeSaveFileName(ui.saveas.value);
           saveFile(savedString, `${name}${fileExtension}`);
           ui.fsave.classList.add("enhanced");
@@ -2821,7 +2822,7 @@ let events = []; // queue for events
       case 150: // restore game
         puzzle.restoredString = "";
         if (filesave) {
-          //      frestore event - loadSaved(); already done in the event
+          // restore event - loadSaved(); already done in the event.
           state = 152;
         } else {
           try {
@@ -2867,7 +2868,7 @@ let events = []; // queue for events
           state = 10;
           break;
         }
-        /* could check here if data contains expected fields */
+        /* Could check here if data contains expected fields. */
 
         puzzle.restoring = true;
         puzzle.imageLoaded = false;
@@ -2910,7 +2911,7 @@ let events = []; // queue for events
 prepareUI();
 
 window.addEventListener("resize", (event) => {
-  // do not accumulate resize events in events queue - keep only current one
+  // Do not accumulate resize events in events queue - keep only current one.
   if (events.length && events[events.length - 1].event == "resize") return;
   events.push({ event: "resize" });
 });
