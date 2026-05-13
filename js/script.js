@@ -1,4 +1,4 @@
-/* ./js/script.js of SilusGW-puzzle for puzzle.bauska.org */
+/* ./js/script.js of Silus-puzzle for puzzle.bauska.org */
 "use strict";
 // last update: 2026/02/26
 let puzzle, autoStart;
