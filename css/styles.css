@@ -1,7 +1,7 @@
 /* ./css/styles.css of Silus-puzzle for puzzle.bauska.org */
 body {
   font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
-  background-color: #fff;
+  background-color: #fff;  /* white*/
   margin: 0;
   padding: 0;
   border-width: 0;
@@ -20,7 +20,7 @@ input {
   left: 5px;
   top: 5px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 128, 0.9);
+  background-color: rgba(255, 255, 128, 0.9);  /* light, creamy yellow color with 90% opacity */
   color: black;
 }
 
@@ -44,8 +44,8 @@ input {
 }
 
 #menu button.enhanced {
-  background-color: #0f0;
-  border-color: #080;
+  background-color: #00ff00;  /* Pure (or mostly pure) lime green */
+  border-color: #008800;  /* dark lime green */
 }
 
 #forPuzzle {
@@ -55,7 +55,7 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #ffffdd;
+  background-color: #ffffdd;  /* very pale yellow */
   overflow: hidden;
 }
 
@@ -71,7 +71,7 @@ input {
   z-index: 100;
   /* above #menu */
   display: none;
-  background-color: #ffffee99;
+  background-color: #ffffee99;  /* pale, soft yellow with transparency */
 }
 
 .showimage img {
